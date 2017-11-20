@@ -1,0 +1,12 @@
+Create client-server C# application which will allow the user to import contacts from CSV files with a possibility of arbitrary columns arrangement. You will have to finish partially implemented server PhonebookImportServer service and implement whole client part PhonebookImportClient.
+
+To create client part of the application use WPF technology and MVVM architectual design. After start the client app will connect to server PhonebookImportServer using WCF technology. Client app will allow the user to open CSV file and show its content in table. User will be allowed to assign columns to corresponding attributes of the model entity. When the user assigns attributes PhoneNumber and Name, he will be allowed to start import by pressing the Import button. Furthermore, application will remember attribute assignment settings for every CSV file. If user wants to import the same file, application will preset the previous assignment.
+
+
+Import procedure will create list of contact entities according to set assignments and send it to the contract in PhonebookImportServer which will store these entities into database table Phonebook. 
+Before saving the entity server will check that both required properties are set and the uniqueness of the phone number. Server will return the result of the import which will contain count of imported contacts and list of errors with error type and appropriate line number in source CSV file. The result will be shown to the user in the read only textbox.
+
+You can find some additional files in the attachment which contains these items:
+a few CSV files for testing purpose
+SQL Server CE database file with Phonebook table (password: 123456)
+partially implemented PhonebookImportServer service
