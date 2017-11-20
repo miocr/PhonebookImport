@@ -23,7 +23,15 @@ namespace PhonebookImportServer
 
             cfg.LoggingRules.Add(new LoggingRule("*", LogLevel.Debug, target));
             cfg.AddTarget("console", target);
-            //NLog.Config.SimpleConfigurator.ConfigureForTargetLogging(target, LogLevel.Trace); 
+            //NLog.Config.SimpleConfigurator.ConfigureForTargetLogging(target, LogLevel.Trace);
+
+            // Doplněno logování do souboru
+            FileTarget fileTarget = new FileTarget();
+            fileTarget.FileName = "${basedir}/PhonebookImportService.log";
+            fileTarget.Layout = "${date:format=yyyy\\.MM\\.dd HH\\:mm\\:ss}  [${level:uppercase=true}] ${callsite}  =>  ${message}  <${exception:format=tostring}>";
+
+            cfg.LoggingRules.Add(new LoggingRule("*", LogLevel.Debug, fileTarget));
+            cfg.AddTarget("file", fileTarget);
 
             try
             {
@@ -45,6 +53,7 @@ namespace PhonebookImportServer
         {
             logger.Info("Application start");
             
+
             PhonebookImportServiceImpl sampleService = new PhonebookImportServiceImpl();
             
             WcfServiceHost serviceHost = new WcfServiceHost();
