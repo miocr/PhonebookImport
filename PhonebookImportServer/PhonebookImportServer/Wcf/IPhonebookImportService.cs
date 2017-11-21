@@ -4,6 +4,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using PhonebookImportServer.Business;
 
 namespace PhonebookImportServer.Wcf
 {
@@ -12,5 +13,14 @@ namespace PhonebookImportServer.Wcf
     {
         [OperationContract]
         string GetAppName();
+
+        [OperationContract]
+        bool ImportContacts();
+
+        [OperationContract]
+        bool AddContact(PhonebookWCF phonebookItem);
+
+        [OperationContract]
+        phonebook GetPhonebook(int id);
     }
 }

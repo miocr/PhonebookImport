@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PhonebookImportServer.PhonebookModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="PhonebookImportServerPhonebookModelStoreContainer">
+    <EntitySet Name="phonebook" EntityType="PhonebookImportServer.PhonebookModel.Store.phonebook" store:Type="Tables" />
+  </EntityContainer>
+  <EntityType Name="phonebook">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="sys_country_id" Type="int" />
+    <Property Name="number" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="description" Type="nvarchar" MaxLength="200" />
+    <Property Name="company" Type="nvarchar" MaxLength="255" />
+    <Property Name="phone_type" Type="nvarchar" MaxLength="20" />
+    <Property Name="public" Type="bit" Nullable="false" />
+    <Property Name="vip" Type="bit" Nullable="false" />
+  </EntityType>
+</Schema>

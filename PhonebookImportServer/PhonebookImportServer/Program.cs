@@ -3,7 +3,7 @@ using NLog.Config;
 using NLog.Targets;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlServerCe;
+//using System.Data.SqlServerCe;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,6 +59,14 @@ namespace PhonebookImportServer
             WcfServiceHost serviceHost = new WcfServiceHost();
 
             serviceHost.Open(sampleService);
+
+            #region test
+
+            PhonebookImportServiceImpl service = new PhonebookImportServiceImpl();
+            service.ImportContacts();
+
+            #endregion
+
 
             Console.ReadKey();
 
