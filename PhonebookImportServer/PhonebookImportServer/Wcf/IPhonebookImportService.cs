@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using PhonebookImportServer.Business;
+using System.Runtime.Serialization;
+
 
 namespace PhonebookImportServer.Wcf
 {
+    /// <summary>
+    /// Definice rozhraní WCF služby - metody
+    /// </summary>
     [ServiceContract]
     public interface IPhonebookImportService
     {
@@ -15,12 +16,46 @@ namespace PhonebookImportServer.Wcf
         string GetAppName();
 
         [OperationContract]
-        bool ImportContacts();
+        [FaultContract(typeof(ImportRecordResponseError))]
+        ImportRecordResponse ImportContact(PhonebookRecord record);
 
         [OperationContract]
-        bool AddContact(PhonebookWCF phonebookItem);
-
-        [OperationContract]
-        phonebook GetPhonebook(int id);
+        [FaultContract(typeof(ImportRecordsResponseError))]
+        ImportRecordsResponse ImportContacts(List<PhonebookRecord> records);
     }
+
+    /// <summary>
+    /// Definice rozhraní WCF služby - objekty
+    /// </summary>
+    [DataContract]
+    public partial class PhonebookRecord
+    {
+        [DataMember(IsRequired = true)]
+        public int RecordId;
+
+        [DataMember(IsRequired = true)]
+        public string Company; // Name
+
+        [DataMember(IsRequired = true)]
+        public string Number;
+
+        [DataMember]
+        public string Description;
+
+        [DataMember]
+        public string PhoneType;
+
+        [DataMember]
+        public int SysPhoneYupeId;
+
+        [DataMember]
+        public bool Public;
+
+        [DataMember]
+        public bool Vip;
+
+        [DataMember]
+        public int SysCountryId;
+    }
+
 }

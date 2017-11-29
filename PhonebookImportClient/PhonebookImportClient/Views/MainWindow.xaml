@@ -1,0 +1,175 @@
+﻿<Window x:Class="PhonebookImportClient.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PhonebookImportClient.Views"
+        xmlns:localVMs="clr-namespace:PhonebookImportClient.ViewModels"
+        xmlns:localModels="clr-namespace:PhonebookImportClient.Models"
+        mc:Ignorable="d"
+        Title="{Binding Title}" 
+        Height="600" Width="800" Margin="0" ResizeMode="NoResize" FontSize="16">
+
+    <Window.Resources>
+        <Style x:Key="MyButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Padding" Value="10"/>
+            <!--<Setter Property="BorderThickness" Value="10"/>
+            <Setter Property="Background" >
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" >
+                        <GradientStop Color="Yellow" Offset="0"/>
+                        <GradientStop Color="Orange" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Name="MyButtonStyleBorder"
+                            BorderBrush="Gray"
+                            CornerRadius="10"
+                            BorderThickness="3"
+                            Padding="{TemplateBinding Padding}" >
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" >
+                            <GradientStop Color="Yellow" Offset="0"/>
+                            <GradientStop Color="Orange" Offset="1"/>
+                            </LinearGradientBrush>
+                            </Border.Background>
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Value="True" Property="IsMouseOver">
+                                <Setter TargetName="MyButtonStyleBorder" 
+                                        Property="BorderBrush" Value="Black" />
+                                <Setter Property="Foreground" Value="Gray" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid HorizontalAlignment="Center" Margin="0,0,2,0" Width="790">
+        <TabControl x:Name="tabControl" SelectedIndex="{Binding TabControlSelectedIndex}" RenderTransformOrigin="1.344,1.226" >
+            <TabItem x:Name="tabItem1" Header="Krok 1"  IsEnabled="{Binding TabControlItemEnabled[0]}">
+                <Grid Margin="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="Krok1Popis" TextWrapping="Wrap" FontSize="16" Padding="5"
+                        Text="{Binding PopisKrokuRes[0]}"/>
+                    <Button x:Name="btnOpenFile" Grid.Row="1" 
+                            Style="{StaticResource MyButtonStyle}"
+                            Content="  Otevřít CSV soubor  " 
+                            Command="{Binding OpenCSVFileCmd}"
+                            VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tabItem2" Header="Krok 2"  IsEnabled="{Binding TabControlItemEnabled[1]}">
+                <Grid Margin="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="110" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock TextWrapping="Wrap" FontSize="16" Padding="5" Grid.ColumnSpan="2"
+                               Text="{Binding PopisKrokuRes[1]}"/>
+                    <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" FontSize="18" FontWeight="Bold" 
+                           Content="Parametry CSV souboru" Margin="0" Padding="5"/>
+                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,30,0,0"  >
+                        <Label Content="Typ CSV souboru" FontWeight="Medium" />
+                        <CheckBox x:Name="checkBox1LineHeader" Grid.Row="1" Grid.Column="0"
+                            IsChecked="{Binding CSVHasHeader}"
+                            Content="První řádek obsahuje názvy sloupců" Margin="8,0,0,0"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,30,0,0"  >
+                        <Label Content="Znaková sada CSV souboru" FontWeight="Medium" />
+                        <StackPanel  x:Name="radioCP">
+                            <RadioButton x:Name="radioCP1250" Content="Windows (CP1250)" IsChecked="{Binding CP1250}"/>
+                            <RadioButton x:Name="radioCP852" Content="MS-DOS  (ISO8859-2)" IsChecked="{Binding CP852}" />
+                        </StackPanel>
+                    </StackPanel>
+                    <Button x:Name="btnReadFile" Grid.Row="2" Grid.ColumnSpan="2" 
+                            Content="  Načíst data ze souboru  " 
+                             Style="{StaticResource MyButtonStyle}"
+                            Command="{Binding ReadCSVFileCmd}"
+                            VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tabItem3" Header="Krok 3" IsEnabled="{Binding TabControlItemEnabled[2]}">
+                <Grid Margin="10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="100" />
+                            <RowDefinition Height="100" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" TextWrapping="Wrap" FontSize="16" Padding="5"
+                                   Text="{Binding PopisKrokuRes[2]}" 
+                                   />
+                        <Button x:Name="btnImport" Grid.Row="1" Grid.Column="1" 
+                                Content="  Importovat data  " 
+                                Style="{StaticResource MyButtonStyle}"
+                                Command="{Binding ImportDataCmd}"
+                                HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="0" />
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Margin="0,10,0,0" VerticalAlignment="Top">
+                            <Label Content="Jméno" VerticalAlignment="Top" Height="30" Width="80" HorizontalAlignment="Left"/>
+                            <ComboBox x:Name="comboBoxNameAssign" 
+                                      ItemsSource="{Binding AssignComboColumns}" 
+                                      SelectedIndex="{Binding AssignedNameColumnIndex}"
+                                      Text="{Binding AssignedNameColumnText}"
+                                      Width="220" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,2,0,0" MaxDropDownHeight="150"/>
+
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Margin="0,0,0,10" VerticalAlignment="Bottom">
+                            <Label DataContext="" Content="Telefon" Height="30" VerticalAlignment="Bottom" Width="80" HorizontalAlignment="Left"/>
+                            <ComboBox x:Name="comboBoxNumberAssign"  
+                                      ItemsSource="{Binding AssignComboColumns}"
+                                      SelectedIndex="{Binding AssignedNumberColumnIndex}"
+                                      Text="{Binding AssignedNumberColumnText}"
+                                      Width="220" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20,2,0,0" MaxDropDownHeight="150"/>
+                        </StackPanel>
+                        <DataGrid Grid.Row="2" Grid.ColumnSpan="2" x:Name="dataGrid" ItemsSource="{Binding DataGridData}" HeadersVisibility="Column" ColumnWidth="Auto" />
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tabItem4" Header="Krok 4" IsEnabled="{Binding TabControlItemEnabled[3]}">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="100" />
+                    </Grid.RowDefinitions>
+                    <TextBlock  Grid.Row="0" TextWrapping="Wrap" FontSize="16" Padding="5"
+                               Text="{Binding PopisKrokuRes[3]}" />
+                    <ScrollViewer Grid.Row="1" >
+                        <TextBox  x:Name="textBoxResponse" IsReadOnly="True" Text="{Binding ResponseMessage}" Margin="0,10,0,0"/>
+                    </ScrollViewer>
+                    <Button Grid.Row="2" Content="  Ukončit aplikaci  " 
+                            Style="{StaticResource MyButtonStyle}"
+                            Command="{Binding ExitAppCmd}"
+                            VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="0,10,0,10" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
+
+

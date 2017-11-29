@@ -2,11 +2,6 @@
 using NLog.Config;
 using NLog.Targets;
 using System;
-using System.Collections.Generic;
-//using System.Data.SqlServerCe;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PhonebookImportServer.Business;
 using PhonebookImportServer.Wcf;
 
@@ -23,23 +18,22 @@ namespace PhonebookImportServer
 
             cfg.LoggingRules.Add(new LoggingRule("*", LogLevel.Debug, target));
             cfg.AddTarget("console", target);
-            //NLog.Config.SimpleConfigurator.ConfigureForTargetLogging(target, LogLevel.Trace);
 
-            // Doplněno logování do souboru
+            #region Logování do souboru
+            /*
             FileTarget fileTarget = new FileTarget();
             fileTarget.FileName = "${basedir}/PhonebookImportService.log";
             fileTarget.Layout = "${date:format=yyyy\\.MM\\.dd HH\\:mm\\:ss}  [${level:uppercase=true}] ${callsite}  =>  ${message}  <${exception:format=tostring}>";
-
             cfg.LoggingRules.Add(new LoggingRule("*", LogLevel.Debug, fileTarget));
             cfg.AddTarget("file", fileTarget);
+            */
+            #endregion
 
             try
             {
                 LogManager.Configuration = cfg;
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         readonly Logger logger = LogManager.GetCurrentClassLogger();
@@ -52,27 +46,16 @@ namespace PhonebookImportServer
         private void Run()
         {
             logger.Info("Application start");
-            
 
-            PhonebookImportServiceImpl sampleService = new PhonebookImportServiceImpl();
-            
+            PhonebookImportServiceImpl sampleService = new PhonebookImportServiceImpl(logger);
+
             WcfServiceHost serviceHost = new WcfServiceHost();
 
             serviceHost.Open(sampleService);
 
-            #region test
-
-            PhonebookImportServiceImpl service = new PhonebookImportServiceImpl();
-            service.ImportContacts();
-
-            #endregion
-
-
             Console.ReadKey();
 
             serviceHost.Close();
-            
-
         }
 
     }

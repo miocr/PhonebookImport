@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/PhonebookImportServer.Business" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/PhonebookImportServer.Business" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ImportRecordResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ImportRecordResponse" nillable="true" type="tns:ImportRecordResponse" />
+  <xs:complexType name="ImportRecordResponseError">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ColumnId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorType" nillable="true" type="tns:ImportErrorType" />
+      <xs:element minOccurs="0" name="RecordId" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ImportRecordResponseError" nillable="true" type="tns:ImportRecordResponseError" />
+  <xs:simpleType name="ImportErrorType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Required" />
+      <xs:enumeration value="DuplicateNumber" />
+      <xs:enumeration value="Unknown" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ImportErrorType" nillable="true" type="tns:ImportErrorType" />
+  <xs:complexType name="ImportRecordsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SuccessRecordsCount" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ImportRecordsResponse" nillable="true" type="tns:ImportRecordsResponse" />
+  <xs:complexType name="ImportRecordsResponseError">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorRecordsCount" type="xs:int" />
+      <xs:element minOccurs="0" name="ImportErrors" nillable="true" type="tns:ArrayOfImportRecordResponseError" />
+      <xs:element minOccurs="0" name="SuccessRecordsCount" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ImportRecordsResponseError" nillable="true" type="tns:ImportRecordsResponseError" />
+  <xs:complexType name="ArrayOfImportRecordResponseError">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ImportRecordResponseError" nillable="true" type="tns:ImportRecordResponseError" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfImportRecordResponseError" nillable="true" type="tns:ArrayOfImportRecordResponseError" />
+</xs:schema>
