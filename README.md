@@ -25,6 +25,9 @@ Example:
 * 401 - Unauthorized
 * 500 - Internal server error
 
+### C4 diagram
+![C4 diagram](/IGT-deposit-code.drawio.png)
+
 ### Authorization
 REST API used to hamc authentication access
 [GitHub](https://github.com/cuongle/Hmac.WebApi
