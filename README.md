@@ -5,9 +5,9 @@ API for obtaining a deposit code via the IGT terminal
 ## Version: 1.0
 
 ## Terms
-**eTip API** - Application Programming Interface for IGT terminals  
-**eTip API server** - Server, which allows to communicate with IGT terminals via defined web api interface
-**SharedSecret** - Configurable value on API server
+* __eTip API__ - Application Programming Interface for IGT terminals
+* __eTip API server__ - Server, which allows to communicate with IGT terminals via defined web api interface 
+* __SharedSecret__ - Configurable value on API server 
 
 ## Communication framework
 IGT API is based on REST architecture. It is a way to easily create, read, edit or delete information from a server using simple HTTP call.
@@ -19,7 +19,7 @@ Example:
 
 ### Response
 
-**HTTP status codes**
+## HTTP status codes
 * 200 - OK
 * 400 - Bad request
 * 401 - Unauthorized
@@ -30,7 +30,7 @@ REST API used to hamc authentication access
 [GitHub](https://github.com/cuongle/Hmac.WebApi
 )
 
-**Client auth - create request with timestamp  and authorization header value  based  on request content, timestamp and credentials**
+__Client auth - create request with timestamp  and authorization header value  based  on request content, timestamp and credentials__
 
 Example:
 > curl -X POST \ https://tst-services.etipos.sk/api/igt/v1/transaction/depositcode \
