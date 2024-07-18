@@ -1,5 +1,5 @@
 
-# SYNOTTECH TIPOS - IGT API
+# TIPOS - IGT API
 API for obtaining a deposit code via the IGT terminal
 
 ## Version: 1.0
