@@ -5,9 +5,9 @@ API for obtaining a deposit code via the IGT terminal
 ## Version: 1.0
 
 ## Terms
-**IGT API** - Application Programming Interface for IGT terminals  
-**IGT API server** - Server, which allows to communicate with IGT terminals via defined web api interface (IGT API)  
-**SharedSecret** - Configurable value on IGT API server  and client
+**eTip API** - Application Programming Interface for IGT terminals  
+**eTip API server** - Server, which allows to communicate with IGT terminals via defined web api interface
+**SharedSecret** - Configurable value on API server
 
 ## Communication framework
 IGT API is based on REST architecture. It is a way to easily create, read, edit or delete information from a server using simple HTTP call.
@@ -207,3 +207,13 @@ The code can be canceled within 3 minutes of creation. After this time, the canc
     "error":0
 }
 ```
+#### Error codes
+|Number|Name|Description|
+|-|-|-|
+|0|Success|
+|1|CommonError|Other than specified error below
+|2|InvalidAmount|Amount is not valid decimal number
+|3|InvalidCode|Deposit Code is invalid (empty atc...)
+|4|NotFound|Requested dposit Code not found (for Cancel, Commit..)
+|5|InvalidState|Code hasn't valid state for requested operation (Example: Commit canceled code etc.)
+|6|CancelPeriodExpired|| 
