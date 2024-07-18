@@ -18,20 +18,12 @@ Example:
 > /api/igt/v1/isalive
 
 ### Response
+
 **HTTP status codes**
 * 200 - OK
 * 400 - Bad request
 * 401 - Unauthorized
 * 500 - Internal server error
-
-**HTTP status codes 400. Error numbers**
-       Success = 0,
-       CommonError = 1,
-       InvalidAmount = 2,
-       InvalidCode = 3,
-       NotFound = 4,
-       InvalidState = 5,
-       CancelPeriodExpired = 6,
 
 ### Authorization
 REST API used to hamc authentication access
