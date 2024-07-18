@@ -25,11 +25,11 @@ Example:
 * 401 - Unauthorized
 * 500 - Internal server error
 
-### C4 diagram
+### Communication overview
 ![C4 diagram](/IGT-deposit-code.drawio.png)
 
 ### Authorization
-REST API used to hamc authentication access
+REST API used to HMAC authentication access
 [GitHub](https://github.com/cuongle/Hmac.WebApi
 )
 
@@ -161,13 +161,11 @@ The code can be canceled within 3 minutes of creation. After this time, the canc
 ### Response
 |Property |Type|Description |
 |-|:-|:-|
-|code|string|generated deposit code
 |error|int|operation result error (see ref)
 
 #### Example 
 ```json
-{
-    "code":"1234-5678-1234-5678",
+{   
     "error":0
 }
 ```
@@ -192,13 +190,11 @@ The code can be canceled within 3 minutes of creation. After this time, the canc
 ### Response
 |Property |Type|Description |
 |-|:-|:-|
-|code|string|generated deposit code
 |error|int|operation result error (see ref)
 
 #### Example 
 ```json
-{
-    "code":"1234-5678-1234-5678",
+{    
     "error":0
 }
 ```
