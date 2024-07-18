@@ -139,7 +139,7 @@ Please contact us
 ```
 
 ## Cancel 
-* HTTP method: POST
+* HTTP method: PUT
 * URI: /api/igt/v1/transaction/cancel
 
 ## Note 
@@ -171,7 +171,7 @@ The code can be canceled within 3 minutes of creation. After this time, the canc
 ```
 
 ## Commit 
-* HTTP method: POST
+* HTTP method: PUT
 * URI: /api/igt/v1/transaction/commit
 
 ### Request 
