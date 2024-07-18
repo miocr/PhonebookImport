@@ -165,7 +165,8 @@ The code can be canceled within 3 minutes of creation. After this time, the canc
 
 #### Example 
 ```json
-{   
+{
+    "code":"1234-5678-1234-5678",
     "error":0
 }
 ```
@@ -194,7 +195,8 @@ The code can be canceled within 3 minutes of creation. After this time, the canc
 
 #### Example 
 ```json
-{    
+{
+    "code":"1234-5678-1234-5678",
     "error":0
 }
 ```
